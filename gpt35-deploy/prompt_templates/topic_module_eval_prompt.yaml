@@ -1,0 +1,151 @@
+evaluation:
+  eval_code_desc_template: >
+    The following observation and the code snippets if exist are relevant to 
+    Cisco systems product and their management, configuration, and maintenance.
+    
+    Based on the provided information and your knowledge about Cisco products and softwares, please generate the following contents:
+      - 1. EVALUATION: True of False. True if you can resolve the MAJOR_PROBLEM. False if you cannot answer the MAJOR_PROBLEM.
+      Leverage the following information: GOAL, MAIN_QUESTION, SITUATION, UNDERSTANDING when evaluating.
+      - 2. EVALUATION_REASON: Provide the reasons for your EVALUATION
+    
+    The answer must be a valid JSON objects and formatted as below:
+    {{"evaluation": <EVALUATION>, "evaluation_reason": <EVALUATION_REASON>}}
+
+    You are given the following information:
+     - GOAL: This is identified intention of user input, given the user's situation. 
+     Sometimes, user's situation is implict and incomplete. 
+     - MAIN_QUESTION: This is the main question user has and your goal is to answer this MAIN_QUESTION.
+     - MAJOR_PROBLEM: This is the major problem, blocking user's goal. This is the blocker. This prevents users from achieving their goal.
+     - SITUATION: This is the situation user is in. You may need more information about user situation to evaluate. 
+     If you need more information from the user, generate what inforamtion is missing and append it to EVALUATION_REASON
+     - UNDERSTANDING: This is the understanding of user input and user situation. 
+     Sometimes, user's situation is implict and incomplete. Utilize UNDERSTANDING to reveal the user's situation.
+     If you need more information from the user, generate what inforamtion is missing and append it to EVALUATION_REASON
+    
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+
+        - Step 0. Ask yourself if your UNDERSTANDING is enough to answer MAIN_QUESTION and solve MAJOR_PROBLEM.
+        - Step 1. Evaluate whether the user's input and situation miss critical information. 
+        Ask yourself if you need to know more about user's situation.
+        - Step 1. Evaluate whether the CODE_INTERPRETATION misses critical information. 
+        CODE_INTERPRETATION is the ouput from you after interpreting user's provided code snippet, configuration examples, error messages or similar.
+        Ask yourself if you need to know more from the user about the specific network configuration or software version or any features.
+        Ask yourself if you need to know more about Cisco's product, software, configuration, and maintenance. 
+        - Step 2. Generate your <EVALUATION>
+        - Step 3. Explain your reasoning and thought process in <EVALUATION_REASON>
+
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+
+    Question: {question}
+    Answer: 
+
+  eval_desc_template: >
+    The following observation is relevant to Cisco systems product and their management, configuration, and maintenance.
+    
+    Based on the provided information and your knowledge about Cisco products and softwares, please generate the following contents:
+      - 1. EVALUATION: True of False. True if you can resolve the MAJOR_PROBLEM. False if you cannot answer the MAJOR_PROBLEM.
+      Leverage the following information: GOAL, MAIN_QUESTION, SITUATION, UNDERSTANDING when evaluating.
+      - 2. EVALUATION_REASON: Provide the reasons for your EVALUATION
+    
+    The answer must be a valid JSON objects and formatted as below:
+    {{"evaluation": <EVALUATION>, "evaluation_reason": <EVALUATION_REASON>}}
+
+    You are given the following information:
+     - GOAL: This is identified intention of user input, given the user's situation. 
+     Sometimes, user's situation is implict and hidden. 
+     - MAIN_QUESTION: This is the main question user has and your goal is to answer this MAIN_QUESTION.
+     - MAJOR_PROBLEM: This is the major problem, blocking user's goal. This is the blocker. This prevents users from achieving their goal.
+     - SITUATION: This is the situation user is in. You may need more information about user situation to evaluate. 
+     If you need more information from the user, generate what inforamtion is missing and append it to EVALUATION_REASON
+    
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+
+        - Step 0. Ask yourself if your UNDERSTANDING is enough to answer MAIN_QUESTION and solve MAJOR_PROBLEM.
+        - Step 1. Evaluate whether the user's input and situation miss critical information. 
+        Ask yourself if you need to know more about user's situation.
+        - Step 1. Evaluate whether the INTENTION and MAIN_QUESTION misses critical information, espeically any code snippets, configuration examples, error messages or similar.
+        Ask yourself if you need to know more from the user about the specific network configuration or software version or any features.
+        Ask yourself if you need to know more about Cisco's product, software, configuration, and maintenance. 
+        - Step 2. Generate your <EVALUATION>
+        - Step 3. Explain your reasoning and thought process in <EVALUATION_REASON>
+
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+
+    Question: {question}
+    Answer: 
+    
+  eval_code_desc_template_v1: >
+    The following observation and the code snippets if exist are relevant to 
+    Cisco systems product and their management, configuration, and maintenance.
+    
+    Based on the provided information and your knowledge about Cisco products and softwares, please generate the following contents:
+      - 1. EVALUATION: True of False. True if you can resolve the MAIN_QUESTION. False if you cannot answer the MAIN_QUESTION.
+      - 2. EVALUATION_REASON: Provide the reasons for your EVALUATION
+    
+    The answer must be a valid JSON objects and formatted as below:
+    {{"evaluation": <EVALUATION>, "evaluation_reason": <EVALUATION_REASON>}}
+
+    You are given the following information:
+     - INTENTION: This is identified intention of user input, given the user's situation. 
+     Sometimes, user's situation is implict and hidden. 
+     - MAIN_QUESTION: This is the main question user has and your goal is to answer this MAIN_QUESTION.
+     - SITUATION: This is the situation user is in. You may need more information about user situation to evaluate. 
+     If you need more information from the user, generate what inforamtion is missing and append it to EVALUATION_REASON
+     - UNDERSTANDING: This is the understanding of user input and user situation. 
+     Sometimes, user's situation is implict and incomplete. Utilize UNDERSTANDING to reveal the user's situation.
+     If you need more information from the user, generate what inforamtion is missing and append it to EVALUATION_REASON
+    
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+
+        - Step 0. Ask yourself if your UNDERSTANDING is enough to answer MAIN_QUESTION
+        - Step 1. Evaluate whether the user's input and situation miss critical information. 
+        Ask yourself if you need to know more about user's situation.
+        - Step 1. Evaluate whether the CODE_INTERPRETATION misses critical information. 
+        CODE_INTERPRETATION is the ouput from you after interpreting user's provided code snippet, configuration examples, error messages or similar.
+        Ask yourself if you need to know more from the user about the specific network configuration or software version or any features.
+        Ask yourself if you need to know more about Cisco's product, software, configuration, and maintenance. 
+        - Step 2. Generate your <EVALUATION>
+        - Step 3. Explain your reasoning and thought process in <EVALUATION_REASON>
+
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+
+    Question: {question}
+    Answer: 
+
+  eval_desc_template_v1: >
+    The following observation is relevant to Cisco systems product and their management, configuration, and maintenance.
+    
+    Based on the provided information and your knowledge about Cisco products and softwares, please generate the following contents:
+      - 1. EVALUATION: True of False. True if you can resolve the MAIN_QUESTION. False if you cannot answer the MAIN_QUESTION.
+      - 2. EVALUATION_REASON: Provide the reasons for your EVALUATION
+    
+    The answer must be a valid JSON objects and formatted as below:
+    {{"evaluation": <EVALUATION>, "evaluation_reason": <EVALUATION_REASON>}}
+
+    You are given the following information:
+     - INTENTION: This is identified intention of user input, given the user's situation. 
+     Sometimes, user's situation is implict and hidden. 
+     - MAIN_QUESTION: This is the main question user has and your goal is to answer this MAIN_QUESTION.
+     - SITUATION: This is the situation user is in. You may need more information about user situation to evaluate. 
+     If you need more information from the user, generate what inforamtion is missing and append it to EVALUATION_REASON
+     
+    
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+
+        - Step 0. Ask yourself if your UNDERSTANDING is enough to answer MAIN_QUESTION
+        - Step 1. Evaluate whether the user's input and situation miss critical information. 
+        Ask yourself if you need to know more about user's situation.
+        - Step 1. Evaluate whether the INTENTION and MAIN_QUESTION misses critical information, espeically any code snippets, configuration examples, error messages or similar.
+        Ask yourself if you need to know more from the user about the specific network configuration or software version or any features.
+        Ask yourself if you need to know more about Cisco's product, software, configuration, and maintenance. 
+        - Step 2. Generate your <EVALUATION>
+        - Step 3. Explain your reasoning and thought process in <EVALUATION_REASON>
+
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+
+    Question: {question}
+    Answer: 

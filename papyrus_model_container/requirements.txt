@@ -1,0 +1,11 @@
+Flask==3.0.2
+pandas==2.2.1
+Requests==2.31.0
+transformers==4.38.2
+torch==2.2.0
+triton==2.2.0
+xformers==0.0.24
+peft==0.9.0
+bitsandbytes==0.43.0
+optimum==1.17.1
+PyYAML==6.0.1

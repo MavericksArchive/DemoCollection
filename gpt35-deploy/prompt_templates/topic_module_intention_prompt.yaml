@@ -1,0 +1,414 @@
+intention:
+  intention_understanding_template: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realises they're wrong at any point then they leave. 
+
+    The following observation and the CODE_INTERPRETATION, if exist, are relevant to Cisco systems product and their management, configuration, and maintenance.
+    Consider the input code, CODE_INTERPRETATION, when available. 
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Find the goal of the user from the input description, USER_INPUT. 
+      The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?"
+      When CODE_INTERPRETATION is provided, the CODE_INTERPRETATION can reveal the current situation further. 
+      Consider putting more weights on understanding the CODE_INTERPRETATION if exists.
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. 
+      - 3. SITUATION: Provide the user's situation, largely based on the CODE_INTERPRETATION provided if any. 
+      - 4. MAJOR_PROBLEM: Create the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?" 
+        
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>, "major_problem": <MAJOR_PROBLEM>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+
+        - Step 1. Understand the input text and CODE_INTERPRETATION to know user's situation.
+        - Step 2. Understand the main question in the input by asking "What does this person try to solve or achieve?"
+        - Step 3. Understand the input text and CODE_INTERPRETATION to know user's situation.
+        - Step 4. Understand the input text and CODE_INTERPRETATION to know the goal of the user
+        - Step 5. Understand the input text and CODE_INTERPRETATION to identify the user's major problem
+        
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+
+    CODE_INTERPRETATION: {code_interpretation}
+    Question: {question}
+    Answer: 
+  intention_understanding_no_code_template_id: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realises they're wrong at any point then they leave. 
+
+    The following observationa is relevant to Cisco systems product and their management, configuration, and maintenance.
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Based on your understanding, find the goal of the user from the input. The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?" If there exists a question or questions inside the input, pay close attention to those question(s).      
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. 
+      - 3. SITUATION: Based on your understanding, provide the user's situation. What situation the user is in?
+      - 4. MAJOR_PROBLEM: Create the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?" 
+      - 5. EXTRACTED_ENTITY: Extract Cisco entity from the input. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+      - 6. SYSTEM_MESSAGE: Extract Cisco system message from the input. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+        
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>, "major_problem": <MAJOR_PROBLEM>, "extracted_entity": <EXTRACTED_ENTITY>,  "system_message": <SYSTEM_MESSAGE>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+        - Step 1. Understand the input text to know user's situation. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 2. Understand the main question in the input by asking "What does this person try to solve or achieve?". If there exists a question or questions inside the input, pay close attention to those question(s).
+        - Step 3. Understand the input text to know the goal of the user. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 4. Understand the input text to identify the user's major problem. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 5. Extract Cisco entity from the input. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+        - Step 6. Extract Cisco system message from the input. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+        
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+    If there exists a question or questions inside the input, pay close attention to those question(s).
+
+    Question: {question}
+    Answer:
+  intention_understanding_no_code_template_id_steps: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realises they're wrong at any point then they leave. 
+
+    The following observationa is relevant to Cisco systems product and their management, configuration, and maintenance.
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Based on your understanding, find the goal of the user from the input. The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?" If there exists a question or questions inside the input, pay close attention to those question(s).      
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. 
+      - 3. SITUATION: Based on your understanding, provide the user's situation. What situation the user is in?
+      - 4. MAJOR_PROBLEM: Create the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?" 
+      - 5. EXTRACTED_ENTITY: Extract Cisco entity from the input. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+      - 6. SYSTEM_MESSAGE: Extract Cisco system message from the input. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+      - 7. STEPS: In three bullet points, suggest a list of generatl solution steps as follow. (a) Analyze affected devices, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer.
+
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>, "major_problem": <MAJOR_PROBLEM>, "extracted_entity": <EXTRACTED_ENTITY>, "system_message": <SYSTEM_MESSAGE>, "steps": <STEPS>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+        - Step 1. Understand the input text to know user's situation. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 2. Understand the main question in the input by asking "What does this person try to solve or achieve?". If there exists a question or questions inside the input, pay close attention to those question(s).
+        - Step 3. Understand the input text to know the goal of the user. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 4. Understand the input text to identify the user's major problem. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 5. Extract Cisco entity from the input. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+        - Step 6. Extract Cisco system message from the input. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+        - Step 7. In three bullet points, suggest a list of generatl solution steps as follow. (a) Analyze affected devices, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer.
+
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+    If there exists a question or questions inside the input, pay close attention to those question(s).
+
+    Question: {question}
+    Answer:
+  intention_understanding_no_code_template_id_steps_sol: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realises they're wrong at any point then they leave. 
+
+    The following observationa is relevant to Cisco systems product and their management, configuration, and maintenance.
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Based on your understanding, find the goal of the user from the input. The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?" If there exists a question or questions inside the input, pay close attention to those question(s).      
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. 
+      - 3. SITUATION: Based on your understanding, provide the user's situation. What situation the user is in?
+      - 4. MAJOR_PROBLEM: Create the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?" 
+      - 5. EXTRACTED_ENTITY: Extract Cisco entity from the input and provide them as a list of Python strings. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+      - 6. SYSTEM_MESSAGE: Extract Cisco system message from the input. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+      - 7. STEPS: In three bullet points, suggest a list of generatl solution steps as follow. (a) Analyze affected devices using the Papyrus model or the below code, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer.
+      - 8. SOLUTIONS: In three bullet points, suggest a list of potential solutions from the identified problem. You must include the following as one of your solutions: integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket.
+
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>, "major_problem": <MAJOR_PROBLEM>, "extracted_entity": <EXTRACTED_ENTITY>, "system_message": <SYSTEM_MESSAGE>, "steps": <STEPS>, "solutions": <SOLUTIONS>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+        - Step 1. Understand the input text to know user's situation. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 2. Understand the main question in the input by asking "What does this person try to solve or achieve?". If there exists a question or questions inside the input, pay close attention to those question(s).
+        - Step 3. Understand the input text to know the goal of the user. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 4. Understand the input text to identify the user's major problem. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 5. Extract Cisco entity from the input. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+        - Step 6. Extract Cisco system message from the input and provide them as a list of Python strings. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+        - Step 7. In three bullet points, suggest a list of generatl solution steps as follow. (a) Analyze affected devices using the Papyrus model or the below code, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer.
+        - Step 8. In three bullet points, suggest a list of potential solutions from the identified problem.  You must include the following as one of your solutions: integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket.
+
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+    If there exists a question or questions inside the input, pay close attention to those question(s).
+
+    Question: {question}
+    Answer:
+  intention_understanding_no_code_template_id_steps_sol_v1: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realizes they're wrong at any point then they leave. 
+
+    The following observation is relevant to Cisco systems product and their management, configuration, and maintenance.
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. SUMMARY: Based on your understanding of the followings, summarize your understanding in one paragraph, preferably in one sentence. The output must a valid Python string.
+      (1) Identify the goal of the user from the input. The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?" If there exists a question or questions inside the input, pay close attention to those question(s).      
+      (2) Identify the main question the person tries to solve or achieve. If there exists a question or questions inside the input, pay close attention to those question(s).  
+      (3) Identify the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?"
+      (4) Extract any questions from the user input. Any questions asked by the user must be considered and included when summarizing.
+      - 2. SITUATION: Based on your understanding, provide the user's situation. What situation the user is in?
+      - 3. EXTRACTED_ENTITY: Extract Cisco entity from the input and provide them as a list of Python strings. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+      - 4. SYSTEM_MESSAGE: Extract Cisco system message from the input and provide them as a list of Python strings. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+      - 5. STEPS: In three bullet points, suggest a list of general solution steps as follow. (a) Analyze affected devices using our Papyrus model or the below code, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer. (a) must include the word Papyrus.
+      - 6. SOLUTIONS: In three bullet points, suggest a list of potential solutions from the identified problem. You must include the following as one of your solutions: integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket.
+
+    The answer must be a valid JSON objects and formatted as below:
+    {{"summary": <SUMMARY>, "situation": <SITUATION>, "extracted_entity": <EXTRACTED_ENTITY>, "system_message": <SYSTEM_MESSAGE>, "steps": <STEPS>, "solutions": <SOLUTIONS>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+        - Step 1. Understand the input text to know user's situation. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 2. Understand the input text to identify the user's major problem and know the goal of the user by asking "What does this person try to solve or achieve?". If there exists a question or questions inside the input, pay close attention to those question(s).
+        - Step 3. Extract Cisco entity from the input and provide them as a list of Python strings. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+        - Step 4. Extract Cisco system message from the input and provide them as a list of Python strings. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+        - Step 5. In three bullet points, suggest a list of general solution steps as follow. (a) Analyze affected devices using our Papyrus model or the below code, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer. (a) must include the word Papyrus.
+        - Step 6. In three bullet points, suggest a list of potential solutions from the identified problem.  You must include the following as one of your solutions: integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket.
+
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+    If there exists a question or questions inside the input, pay close attention to those question(s).
+
+    Question: {question}
+    Answer:
+  intention_understanding_no_code_template_id_steps_sol_v2: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realizes they're wrong at any point then they leave. 
+
+    The following observation is relevant to Cisco systems product and their management, configuration, and maintenance.
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Based on your understanding, find the goal of the user from the input. The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?" If there exists a question or questions inside the input, pay close attention to those question(s).      
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. Extract any questions from the user input. Any questions asked by the user must be considered and included.
+      - 3. SITUATION: Based on your understanding, provide the user's situation. What situation the user is in? Extract any questions from the user input. Any questions asked by the user must be considered and included.
+      - 4. MAJOR_PROBLEM: Create the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?". Extract any questions from the user input. Any questions asked by the user must be considered and included. 
+      - 5. SUMMARY: Based on your understanding of the <GOAL>, <MAIN_QUESTION>, <SITUATION>, and <MAJOR_PROBLEM>, summarize your understanding in one paragraph, preferably in one sentence. The output must a valid Python string.      
+      - 6. EXTRACTED_ENTITY: Extract Cisco entity from the input and provide them as a list of Python strings. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+      - 7. SYSTEM_MESSAGE: Extract Cisco system message from the input and provide them as a list of Python strings. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+      - 8. STEPS: In three bullet points, suggest a list of general solution steps as follow. (a) Analyze affected devices using our Papyrus model or the below code, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer. (a) must include the word Papyrus.
+      - 9. SOLUTIONS: In three bullet points, suggest a list of potential solutions from the identified problem. You must include the following as one of your solutions: integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket.
+
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>, "major_problem": <MAJOR_PROBLEM>, "summary": <SUMMARY>, "extracted_entity": <EXTRACTED_ENTITY>, "system_message": <SYSTEM_MESSAGE>, "steps": <STEPS>, "solutions": <SOLUTIONS>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+        - Step 1. Understand the input text to know user's situation. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 2. Understand the input text to identify the user's major problem and know the goal of the user by asking "What does this person try to solve or achieve?". If there exists a question or questions inside the input, pay close attention to those question(s).
+        - Step 3. Extract Cisco entity from the input and provide them as a list of Python strings. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+        - Step 4. Extract Cisco system message from the input and provide them as a list of Python strings. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+        - Step 5. In three bullet points, suggest a list of general solution steps as follow. (a) Analyze affected devices using our Papyrus model or the below code, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer. (a) must include the word Papyrus.
+        - Step 6. In three bullet points, suggest a list of potential solutions from the identified problem.  You must include the following as one of your solutions: integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket.
+
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+    If there exists a question or questions inside the input, pay close attention to those question(s).
+
+    Question: {question}
+    Answer:
+  intention_understanding_no_code_template_id_steps_sol_v3: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realizes they're wrong at any point then they leave. 
+
+    The following observation is relevant to Cisco systems product and their management, configuration, and maintenance.
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Based on your understanding, find the goal of the user from the input. The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?" If there exists a question or questions inside the input, pay close attention to those question(s).      
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. Extract any questions from the user input. Any questions asked by the user must be considered and included.
+      - 3. SITUATION: Based on your understanding, provide the user's situation. What situation the user is in? Extract any questions from the user input. Any questions asked by the user must be considered and included.
+      - 4. MAJOR_PROBLEM: Create the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?". Extract any questions from the user input. Any questions asked by the user must be considered and included. 
+      - 5. EXTRACTED_ENTITY: Extract Cisco entity from the input and provide them as a list of Python strings. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+      - 6. SYSTEM_MESSAGE: Extract Cisco system message from the input and provide them as a list of Python strings. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+      - 7. STEPS: In three bullet points, suggest a list of general solution steps as follow. (a) Analyze affected devices using our Papyrus model or the below code, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer. (a) must include the word Papyrus.
+      - 8. SOLUTIONS: In three bullet points, suggest a list of potential solutions from the identified problem. You must include the following as one of your solutions: integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket.
+
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>, "major_problem": <MAJOR_PROBLEM>, "extracted_entity": <EXTRACTED_ENTITY>, "system_message": <SYSTEM_MESSAGE>, "steps": <STEPS>, "solutions": <SOLUTIONS>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+        - Step 1. Understand the input text to know user's situation. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 2. Understand the input text to identify the user's major problem and know the goal of the user by asking "What does this person try to solve or achieve?". If there exists a question or questions inside the input, pay close attention to those question(s).
+        - Step 3. Extract Cisco entity from the input and provide them as a list of Python strings. For example, device name, device hostname, IP address, MAC address, Product ID, Vulnerability ID, Field Notice ID, Defect ID, Product Family Name, and so on. Any entity that is distinguished from the natural language should be extracted here. 
+        - Step 4. Extract Cisco system message from the input and provide them as a list of Python strings. They start with the '%' character. Assume a sequence of words as a Cisco system meessage if it starts with '%'. Here are the exmaples. Syslog message (For example, '%SYS-5-CONFIG_I', '%LINEPROTO-5-UPDOWN'), error message (For example, '%CARD-SEVERITY-MSG', '%FACILITY-SUBFACILITY-SEVERITY-MNEMONIC'), and so on.
+        - Step 5. In three bullet points, suggest a list of general solution steps as follow. (a) Analyze affected devices using our Papyrus model or the below code, (b) Suggest possible remediation actions, and (c) suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. Output 3 bullet points that mimic (a), (b), (c) in the answer. (a) must include the word Papyrus.
+        - Step 6. In three bullet points, suggest a list of potential solutions from the identified problem.  You must include the following as one of your solutions: integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket. (a) must include the word Papyrus.
+
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+    If there exists a question or questions inside the input, pay close attention to those question(s).
+
+    Question: {question}
+    Answer:
+  intention_understanding_no_code_template: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realises they're wrong at any point then they leave. 
+
+    The following observationa is relevant to Cisco systems product and their management, configuration, and maintenance.
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Based on your understanding, find the goal of the user from the input. The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?" If there exists a question or questions inside the input, pay close attention to those question(s).      
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. 
+      - 3. SITUATION: Based on your understanding, provide the user's situation. What situation the user is in?
+      - 4. MAJOR_PROBLEM: Create the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?" 
+        
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>, "major_problem": <MAJOR_PROBLEM>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+
+        - Step 1. Understand the input text to know user's situation. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 2. Understand the main question in the input by asking "What does this person try to solve or achieve?". If there exists a question or questions inside the input, pay close attention to those question(s).
+        - Step 3. Understand the input text to know the goal of the user. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        - Step 4. Understand the input text to identify the user's major problem. If there exists a question or questions inside the input, pay close attention to those question(s).      
+        
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+    If there exists a question or questions inside the input, pay close attention to those question(s).
+
+    Question: {question}
+    Answer:
+  gen_mq_without_code_template: >
+    You are an AI language model assistant. Your task is to generate 3 different versions of the given user question to 
+    retrieve relevant documents from a vector  database. By generating multiple perspectives on the user question, your goal 
+    is to help the user overcome some of the limitations of distance-based similarity search. Provide these alternative questions 
+    separated by newlines. 
+    
+    Original question: {question}
+    Answer: 
+
+
+
+  ## =======================================================================================
+  ## Older versions
+  ## =======================================================================================
+
+intention_older:  
+  intention_understanding_template_v1: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realises they're wrong at any point then they leave. 
+
+    The following observation and the code snippets, if exist, are relevant to Cisco systems product and their management, configuration, and maintenance.
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Find the goal of the user from the input description, USER_INPUT. 
+      Consider the input code, CODE_INTERPRETATION, when available. 
+      The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?"
+      When CODE_INTERPRETATION is provided, the code can reveal the current situation further. 
+      Consider putting more weights on understanding the code if exists.
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. 
+      - 3. SITUATION: Provide the user's situation, largely based on the CODE_INTERPRETATION provided if any. 
+        
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+
+        - Step 1. Understand the input text and code snippet to know user's situation.
+        - Step 2. Understand the main question in the input by asking "What does this person try to solve or achieve?"
+        - Step 3. Understand the input text and code snippet to know user's situation.
+        - Step 4. Understand the input text and code snippet to know the goal of the user
+        
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+
+    Question: {question}
+    Answer: 
+  intention_understanding_template_v2: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realises they're wrong at any point then they leave. 
+
+    The following observation and the CODE_INTERPRETATION, if exist, are relevant to Cisco systems product and their management, configuration, and maintenance.
+    Consider the input code, CODE_INTERPRETATION, when available. 
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Find the goal of the user from the input description, USER_INPUT. 
+      The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?"
+      When CODE_INTERPRETATION is provided, the CODE_INTERPRETATION can reveal the current situation further. 
+      Consider putting more weights on understanding the CODE_INTERPRETATION if exists.
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. 
+      - 3. SITUATION: Provide the user's situation, largely based on the CODE_INTERPRETATION provided if any. 
+      - 4. MAJOR_PROBLEM: Create the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?" 
+        
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>, "major_problem": <MAJOR_PROBLEM>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+
+        - Step 1. Understand the input text and CODE_INTERPRETATION to know user's situation.
+        - Step 2. Understand the main question in the input by asking "What does this person try to solve or achieve?"
+        - Step 3. Understand the input text and CODE_INTERPRETATION to know user's situation.
+        - Step 4. Understand the input text and CODE_INTERPRETATION to know the goal of the user
+        - Step 5. Understand the input text and CODE_INTERPRETATION to identify the user's major problem
+        
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+
+    CODE_INTERPRETATION: {code_interpretation}
+    Question: {question}
+    Answer: 
+  intention_understanding_no_code_template_v1: >
+    Imagine three (3) different Cisco Network engineering experts are answering this question. 
+    All experts will write down 1 step of their thinking, then share it with the group.
+    Then all experts will review each others thoughts and go on to the next step. 
+    If any expert realises they're wrong at any point then they leave. 
+
+    The following observationa is relevant to Cisco systems product and their management, configuration, and maintenance.
+        
+    Based on your knowledge about Cisco products and softwares, please generate the following contents. 
+    The answer must contain the following information:
+
+      - 1. GOAL: Find the goal of the user from the input description, USER_INPUT. 
+      The goal of the user can be found by asking "What does this person try to solve or achieve?" and "What is blocking it from achieving the goal?"      
+      - 2. MAIN_QUESTION: Create the main question the person tries to solve or achieve. 
+      - 3. SITUATION: Provide the user's situation.
+      - 4. MAJOR_PROBLEM: Create the main problem the user is experiencing. Try to answer "what is the major problem user is talking about?" 
+        
+    The answer must be a valid JSON objects and formatted as below:
+    {{"goal": <GOAL>, "main_question": <MAIN_QUESTION>, "situation": <SITUATION>, "major_problem": <MAJOR_PROBLEM>}}
+
+    In order to achieve this, each of the Cisco network expert discuss each of the below steps:
+
+        - Step 1. Understand the input text to know user's situation.
+        - Step 2. Understand the main question in the input by asking "What does this person try to solve or achieve?"
+        - Step 3. Understand the input text to know the goal of the user
+        - Step 4. Understand the input text to identify the user's major problem
+        
+    Only return the above as a valid JSON object, following the above JSON structure.
+    Do not make up if you do not know the solution. Do not generate any extra words outside of the JSON structure.
+
+    Question: {question}
+    Answer:
