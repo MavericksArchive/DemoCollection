@@ -1,5 +1,5 @@
 """
-after emily feedback on 03/11/2024
+after emily feedback on 03/11/2024. Remove the GPT35 dependency/intention module.
 """
 import ast 
 import json
@@ -18,8 +18,6 @@ app = Flask(__name__)
 def make_request_call(url, headers, payload, method='POST'):
     json_payload = json.dumps(payload)
 
-    # import pdb; pdb.set_trace()
-    
     if method == 'POST':
         response = requests.post(url, headers=headers, data=json_payload)
     else:
@@ -106,14 +104,7 @@ def testPipeline():
     dryrun = params.get('dryrun', 'placeholder_dryrun')
     debug = params.get('debug', 'placeholder_debug')
     # run_papyrus_solution = params.get('run_papyrus_solution', True)
-    
-    # if run_papyrus_solution == 'True':
-    #     run_papyrus_solution = True  
-    # elif run_papyrus_solution == 'False':
-    #     run_papyrus_solution = False
-    # else:
-    #     raise Exception('run_papyrus_solution is either True or False')
-    
+        
     # parse body
     raw_query = request.get_json(force=True)
     user_input_body = raw_query.get('user_input', '')
@@ -193,10 +184,7 @@ def testPipeline():
                 extracted_entity=agg_intention['extracted_entity'],
                 system_message=agg_intention['system_message'],
                 steps=agg_intention['steps'])
-        
-        # topic_output_json['intention'] = ''.join([value for _, value in agg_intention.items()])
-        # topic_output_json['intention'] = agg_intention
-            
+                    
     else:     # not running topic module...
         # time.sleep(3)
         if myIntentionFull:
@@ -213,42 +201,6 @@ def testPipeline():
                 solutions=['solution1', 'solution2', 'solution3'])
         else:
             time_topic_module = time.time()-timer_start 
-
-            ## populate the pre-defined output format in case no topic parsing 
-            ## to ensure the FE/BE functional properly.
-
-            # # workflow 1
-            # has_use_case_1_device = user_input_body.find('MRE-Edge2.cisco.com') >= 0
-            # has_use_case_1_sentence = user_input_body.find('never establishes') >= 0
-            # has_backslashes = user_input_body.find('\\') >= 0
-            # if has_use_case_1_device and has_use_case_1_sentence:
-            #     json_result = {"extracted_entity": ["cat9200 switch", "MRE-Edge2.cisco.com", "DNAC"],
-            #                 "steps": ["Analyze affected devices using our Papyrus model or the below code.", 
-            #                             "Suggest possible remediation actions.", 
-            #                             "Suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket."]}            
-
-            #     myIntention = dict(
-            #         extracted_entity=json_result['extracted_entity'], 
-            #         system_message=[],
-            #         steps=json_result['steps'])
-            #     topic_output_json = {'user_input_desc': user_input_body}
-                
-
-            # # workflow 7
-            # has_use_case_2_psirt = user_input_body.find('PSIRT') >= 0
-            # has_use_case_2_sentence = user_input_body.find('cisco-sa-iosxe-webui-privesc-j22SaA4z') >= 0
-            # if has_use_case_2_psirt and has_use_case_2_sentence:
-            #     json_result = {"extracted_entity": ["PSIRT cisco-sa-iosxe-webui-privesc-j22SaA4z"],
-            #                 "steps": ["Analyze affected devices using our Papyrus model or the below code.", 
-            #                         "Suggest possible remediation actions.", 
-            #                         "Suggest the user integrate the remediation action into their change management process, such as creating a ServiceNow incident ticket."]}
-
-            #     myIntention = dict(
-            #         extracted_entity=json_result['extracted_entity'], 
-            #         system_message=[],
-            #         steps=json_result['steps'])
-            #     topic_output_json = {'user_input_desc': user_input_body}
-
             topic_output_json = {'user_input_desc': user_input_body}
 
     
@@ -312,12 +264,7 @@ def testPipeline():
                 user_response_solution_list = papyrus_output_solution_formatting(user_input_body, user_response_solution)
             except:
                 user_response_solution_list = [user_response_solution]        
-        
-        
-        # print(f'stopping for dev/test papyrus solution')
-        # import pdb; pdb.set_trace()
-        
-        
+                
         if run_papyrus_solution:
             MyUserResponse = dict(
                 regex = user_response_regex_list,
@@ -399,15 +346,9 @@ def papyrus_output_regex_formatting(topic_output_json, user_response, key_pair =
                 cmd_clean = segments[0].replace(',', '').strip(' ').rstrip('\n')
                 seg_1_clean = segments[1].replace(',', '').strip(' ').rstrip('\n')
                 
-                # if cmd_clean == " show" or cmd_clean == "show":
-                #     import pdb; pdb.set_trace()                
-                
                 user_response_list.append({'Command': cmd_clean, 'Signature': seg_1_clean})
                 user_response_list.extend([{'Command': '', 'Signature': t_} for t_ in segments[2:]])
 
-
-                # user_response_list.append({'Command': segments[0], 'Signature': segments[1]})
-                # user_response_list.extend([{'Command': '', 'Signature': t_} for t_ in segments[2:]])
             elif len(sub): 
                 user_response_list.append({'Command': sub})
     else:
@@ -456,24 +397,12 @@ def papyrus_output_solution_formatting(user_input_body, user_response_solution):
             user_response_solution_list = [sentence.strip() for sentence in user_response_solution.split('later')]
             sent1 = [f"{user_response_solution_list[0]} later."]
             sentr = [sub for sub in user_response_solution_list[1].split('.')]
-            # print(sent1)
-            # print(sentr[1:-1])
             final_list = sent1.extend(sentr[1:-1])
             final_list = sent1
             final_list[1] += final_list[2]+"." 
             final_list[2] = final_list[-1]+"."
             final_list = final_list[:3]
             final_list = [s.strip() for s in final_list]
-            # print(final_list)
-            # user_response_solution_list = user_response_solution.split('.')[:-1]
-            # sent2_note_list = [sentence.strip() for sentence in user_response_solution_list[1].split('.') if sentence != '']
-            # sent2 = f"{sent2_note_list[0]}. {sent2_note_list[1]}".rstrip('.') + '.'
-            # note = '. '.join(sent2_note_list[2:]).rstrip('/')
-            # if note != '':
-            #     note = note.rstrip('.') + '.'
-            #     final_list = [sent1, f"{sent2} {note}"]
-            # else:
-            #     final_list = [sent1, sent2]
         
         return final_list
     except:
