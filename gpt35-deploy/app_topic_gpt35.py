@@ -55,9 +55,7 @@ config = load_config()
 
 HISTORY = []
 CONV_COUNT = 0
-# user_input = 'my house is burning, who should I call?'
 
-# Initialize the Flask application
 app = Flask(__name__)
        
 
@@ -106,15 +104,6 @@ def dev():
     resp.status_code = 200
     return resp 
 
-
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    # This function will catch all other routes not explicitly defined
-    return jsonify({
-        "message": "Welcome to the ML prediction service. Use the /predict endpoint to make predictions."
-    }), 200
-    
 
 @app.route('/health', methods=['GET'])
 def health():
