@@ -179,7 +179,7 @@ def run_topic_module(query, llm, history=[]):
     :return :
     """
     CONV_COUNT = len(history)
-    max_conv_count = 200
+    max_conv_count = 20000
     
     while CONV_COUNT < max_conv_count:
         unitrun_output, history = run_intention(query, llm, history)
@@ -190,60 +190,60 @@ def run_topic_module(query, llm, history=[]):
             'history': history
         }
             
-    unitrun_output, history = run_unitrun(query, llm, history, retrieve_max_count=1)
+    # unitrun_output, history = run_unitrun(query, llm, history, retrieve_max_count=1)
     
-    print(f'eval_result from unitrun: {unitrun_output["eval_result"]}')
-    print(f'need_fq from unitrun: {unitrun_output["need_fq"]}')
+    # print(f'eval_result from unitrun: {unitrun_output["eval_result"]}')
+    # print(f'need_fq from unitrun: {unitrun_output["need_fq"]}')
 
-    if unitrun_output["eval_result"]:
-        print(f'....')
-        print(f'provide the topic module output to the downstream')
-        print(f'....')
+    # if unitrun_output["eval_result"]:
+    #     print(f'....')
+    #     print(f'provide the topic module output to the downstream')
+    #     print(f'....')
 
-        if unitrun_output["need_fq"]:
-            raise
+    #     if unitrun_output["need_fq"]:
+    #         raise
 
-        # call downstream task
-        print('')
-        print(f'<DOWNSTREAM section>')
-        generated_sol = call_downstream_task(unitrun_output, history)
-        assert isinstance(generated_sol, str)
+    #     # call downstream task
+    #     print('')
+    #     print(f'<DOWNSTREAM section>')
+    #     generated_sol = call_downstream_task(unitrun_output, history)
+    #     assert isinstance(generated_sol, str)
         
-        history = [{k: str(v) for k, v in item.items()} for item in history]
+    #     history = [{k: str(v) for k, v in item.items()} for item in history]
         
-        return {
-            'fqs': None,
-            'generated_sol': generated_sol,
-            'history': history
-        }
+    #     return {
+    #         'fqs': None,
+    #         'generated_sol': generated_sol,
+    #         'history': history
+    #     }
         
-    else:
-        if unitrun_output["need_fq"] and len(unitrun_output["fqs"]) >= 1:
-            if len(unitrun_output["fqs"]) < 1:
-                raise
+    # else:
+    #     if unitrun_output["need_fq"] and len(unitrun_output["fqs"]) >= 1:
+    #         if len(unitrun_output["fqs"]) < 1:
+    #             raise
 
-            print(f'....')
-            print(f'return the fqs to the upstream')
-            print(f'....')
+    #         print(f'....')
+    #         print(f'return the fqs to the upstream')
+    #         print(f'....')
             
-            # generating fqs with unitrun_output and history
+    #         # generating fqs with unitrun_output and history
                         
-            assert isinstance(unitrun_output["fqs"], list)
+    #         assert isinstance(unitrun_output["fqs"], list)
             
-            history = [{k: str(v) for k, v in item.items()} for item in history]
+    #         history = [{k: str(v) for k, v in item.items()} for item in history]
             
-            return {
-                'fqs': '\n'.join(unitrun_output["fqs"]),
-                'generated_sol': None,
-                'history': history
-            }
+    #         return {
+    #             'fqs': '\n'.join(unitrun_output["fqs"]),
+    #             'generated_sol': None,
+    #             'history': history
+    #         }
     
-        else:
-            print(f'check this out ...')
-            print(f'eval_result: {unitrun_output["eval_result"]}')
-            print(f'need_fq: {unitrun_output["need_fq"]}')
-            print(f'need_fq: {unitrun_output["fqs"]}')
-            import pdb; pdb.set_trace()
+    #     else:
+    #         print(f'check this out ...')
+    #         print(f'eval_result: {unitrun_output["eval_result"]}')
+    #         print(f'need_fq: {unitrun_output["need_fq"]}')
+    #         print(f'need_fq: {unitrun_output["fqs"]}')
+    #         import pdb; pdb.set_trace()
         
 
 def call_downstream_task(unitrun_output, history):
