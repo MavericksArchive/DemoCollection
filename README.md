@@ -4,6 +4,9 @@ The centralized hub for the March 2024 demo.
 Here is the high-level diagram:
 ![demo_flow](assets/imgs/demo_flow.png)
 
+User input goes to the main thread ("pipeline") first. The pipeline controls which sub-modules to run. 
+The only submodule used in the demo was "Papyrus (papyrus_model_container)".
+
 ## The top-level directory layout
 
     .
@@ -11,7 +14,7 @@ Here is the high-level diagram:
     ├── bi_ce_container                # Bi-encoder/cross-encoder module
     ├── intention_model_container      # ChatGPT-3.5 intention module
     ├── papyrus_model_container        # Regex/solution generation module
-    ├── pipeline_container             # Pipeline
+    ├── pipeline_container             # Pipeline (the main thread)
     ├── utils                          # Tools and utilities
     ├── README.md
     └── requirements.txt               # Required libraries to install
