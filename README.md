@@ -1,6 +1,9 @@
 # [Work in Progress] DemoCollection
 The centralized hub for the March 2024 demo.
 
+Here is the high-level diagram:
+![demo_flow](assets/imgs/demo_flow.png)
+
 ## The top-level directory layout
 
     .
