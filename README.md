@@ -23,42 +23,26 @@ Here is the high-level diagram:
 
 ## Set up the environment
 
-### 1. Using the docker
+### 1. Set up using the docker
 
 Each container includes Dockerfile to build the docker image/run the docker container.
 Please run the following:
 
-### Build and run docker
-
-- Pipeline docker. This is for the main thread. The user input goes to the main thread first.
+- Build and run the Pipeline docker. This is for the main thread. The user input goes to the main thread first.
 
 ```bash
 docker build -t pipeline .
 docker run -p 2222:2222 intention
 ```
 
-- Bi-encoder/cross-encoder module docker (Not used in the demo)
-
-```bash
-docker build -t bice .
-docker run -p 8089:8089 bice
-```
-
-- Intention (ChatGPT-3.5) docker (Not used in the demo)
-
-```bash
-docker build -t intention .
-docker run -p 8888:8888 intention
-```
-
-- Papyrus (Regex/solution generation) docker
+- Build and run the Papyrus (Regex/solution generation) docker
 
 ```bash
 docker build -t papyrus .
 docker run -p 8090:8090 intention
 ```
 
-### 2. Running locally
+### 2. Set up for running locally
 
 - Create a new environment for the local test. If you have `conda` installed...
 
@@ -108,12 +92,6 @@ curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:2222/health"
 
 # papyrus regex/solution gen
 curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:8090/health"
-
-# bi/ce (Not used in the demo)
-curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:8089/health"
-
-# intention (Not used in the demo)
-curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:8888/health"
 ```
 
 ### Run the example question
@@ -127,17 +105,11 @@ In the example below, we assume the docker containers are running on "http://ip-
 time curl -X POST "http://ip-10-0-0-89.us-west-2.compute.internal:2222/papyrusGen?conversation_id=conv_test_from_curl&message_id=msg_test_from_curl&source=netlens&dryrun=False&debug=False" -H "Content-Type: application/json" -H "X-Api-Key: 230e2b5e-fb08-405c-b9d2-f17e66be3b47" -d '{"user_input": "One of our network management systems has shown that memory utilization for a cat9200 switched named MRE-Edge2.cisco.com has been increasing. The device is attempting to send telemetry data to DNAC but the connection never establishes. I have noticed that the pubd process is consuming the majority of memory. The device is trying to send telemetry data to our DNAC, but it seems the receiver is responding with a device not found.  Is this a bug?", "nodes_run_data": []}'
 ```
 
-- Check the rest of the modules
+- Check the rest of the modules:
 
 ```bash
 ## Papyrus regex/solution generation module
 time curl -X POST http://ip-10-0-0-89.us-west-2.compute.internal:8090/generate -H 'Content-Type: application/json' -d '{"user_input_desc": "One of our network management systems has shown that memory utilization for a cat9200 switched named MRE-Edge2.cisco.com has been increasing. The device is attempting to send telemetry data to DNAC but the connection \\ never establishes. I have noticed that the pubd process is consuming the majority of memory. The device is trying to send telemetry data to our DNAC, but it seems the receiver is responding with a device not found.  Is this a bug?", "page_content": [], "run_papyrus_solution": true}'
-
-## bi/ce (Not used in the demo)
-time curl -X POST http://ip-10-0-0-89.us-west-2.compute.internal:8089/query -H "Content-Type: application/json" -d '{"question": "One of our network management systems has shown that memory utilization for the device dtw-302-9300-sw-1 has been increasing. When I log into Catalyst Center, the device is not showing as managed. Today the switch had a log about memory value exceeding 90%. I have noticed that the 'pubd' process is consuming the majority of memory.  Is this a bug?"}'
-
-# Intention module. Please note the X-Api-Key. (Not used in the demo)
-time curl -X POST http://ip-10-0-0-89.us-west-2.compute.internal:8888/dev -H "Content-Type: application/json" -H "X-Api-Key: 230e2b5e-fb08-405c-b9d2-f17e66be3b47" -d '{"user_input": "One of our network management systems has shown that memory utilization for a cat9200 switched named MRE-Edge2.cisco.com has been increasing. The device is attempting to send telemetry data to DNAC but the connection never establishes. I have noticed that the pubd process is consuming the majority of memory. The device is trying to send telemetry data to our DNAC, but it seems the receiver is responding with a device not found.  Is this a bug?"}'
 ```
 
 ## 2. Run locally
