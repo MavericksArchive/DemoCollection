@@ -35,14 +35,14 @@ docker build -t pipeline .
 docker run -p 2222:2222 intention
 ```
 
-- Bi-encoder/cross-encoder module docker
+- Bi-encoder/cross-encoder module docker (Not used in the demo)
 
 ```bash
 docker build -t bice .
 docker run -p 8089:8089 bice
 ```
 
-- Intention (ChatGPT-3.5) docker
+- Intention (ChatGPT-3.5) docker (Not used in the demo)
 
 ```bash
 docker build -t intention .
@@ -104,14 +104,14 @@ docker ps
 # pipeline
 curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:2222/health"
 
-# bi/ce
-curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:8089/health"
-
-# intention
-curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:8888/health"
-
 # papyrus regex/solution gen
 curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:8090/health"
+
+# bi/ce (Not used in the demo)
+curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:8089/health"
+
+# intention (Not used in the demo)
+curl -X GET "http://ip-10-0-0-89.us-west-2.compute.internal:8888/health"
 ```
 
 ### Run the example question
@@ -128,14 +128,14 @@ time curl -X POST "http://ip-10-0-0-89.us-west-2.compute.internal:2222/papyrusGe
 - Check the rest of the modules
 
 ```bash
-## bi/ce 
-time curl -X POST http://ip-10-0-0-89.us-west-2.compute.internal:8089/query -H "Content-Type: application/json" -d '{"question": "One of our network management systems has shown that memory utilization for the device dtw-302-9300-sw-1 has been increasing. When I log into Catalyst Center, the device is not showing as managed. Today the switch had a log about memory value exceeding 90%. I have noticed that the 'pubd' process is consuming the majority of memory.  Is this a bug?"}'
-
-# Intention module. Please note the X-Api-Key.
-time curl -X POST http://ip-10-0-0-89.us-west-2.compute.internal:8888/dev -H "Content-Type: application/json" -H "X-Api-Key: 230e2b5e-fb08-405c-b9d2-f17e66be3b47" -d '{"user_input": "One of our network management systems has shown that memory utilization for a cat9200 switched named MRE-Edge2.cisco.com has been increasing. The device is attempting to send telemetry data to DNAC but the connection never establishes. I have noticed that the pubd process is consuming the majority of memory. The device is trying to send telemetry data to our DNAC, but it seems the receiver is responding with a device not found.  Is this a bug?"}'
-
 ## Papyrus regex/solution generation module
 time curl -X POST http://ip-10-0-0-89.us-west-2.compute.internal:8090/generate -H 'Content-Type: application/json' -d '{"user_input_desc": "One of our network management systems has shown that memory utilization for a cat9200 switched named MRE-Edge2.cisco.com has been increasing. The device is attempting to send telemetry data to DNAC but the connection \\ never establishes. I have noticed that the pubd process is consuming the majority of memory. The device is trying to send telemetry data to our DNAC, but it seems the receiver is responding with a device not found.  Is this a bug?", "page_content": [], "run_papyrus_solution": true}'
+
+## bi/ce (Not used in the demo)
+time curl -X POST http://ip-10-0-0-89.us-west-2.compute.internal:8089/query -H "Content-Type: application/json" -d '{"question": "One of our network management systems has shown that memory utilization for the device dtw-302-9300-sw-1 has been increasing. When I log into Catalyst Center, the device is not showing as managed. Today the switch had a log about memory value exceeding 90%. I have noticed that the 'pubd' process is consuming the majority of memory.  Is this a bug?"}'
+
+# Intention module. Please note the X-Api-Key. (Not used in the demo)
+time curl -X POST http://ip-10-0-0-89.us-west-2.compute.internal:8888/dev -H "Content-Type: application/json" -H "X-Api-Key: 230e2b5e-fb08-405c-b9d2-f17e66be3b47" -d '{"user_input": "One of our network management systems has shown that memory utilization for a cat9200 switched named MRE-Edge2.cisco.com has been increasing. The device is attempting to send telemetry data to DNAC but the connection never establishes. I have noticed that the pubd process is consuming the majority of memory. The device is trying to send telemetry data to our DNAC, but it seems the receiver is responding with a device not found.  Is this a bug?"}'
 ```
 
 ## 2. Run locally
