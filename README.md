@@ -32,14 +32,14 @@ Please run the following:
 
 ```bash
 docker build -t pipeline .
-docker run -p 2222:2222 intention
+docker run -p 2222:2222 pipeline
 ```
 
 - Build and run the Papyrus (Regex/solution generation) docker
 
 ```bash
 docker build -t papyrus .
-docker run -p 8090:8090 intention
+docker run -p 8090:8090 papyrus
 ```
 
 ### 2. Set up for running locally
