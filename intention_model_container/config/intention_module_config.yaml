@@ -1,0 +1,8 @@
+llm:
+  sleep_time: 1
+
+template:
+  intention_prompt: prompt_templates/topic_module_intention_prompt.yaml
+  code_prompt: prompt_templates/topic_module_code_prompt.yaml
+  eval_prompt: prompt_templates/topic_module_eval_prompt.yaml
+  memory_prompt:   prompt_templates/topic_module_memory_prompt.yaml

@@ -6,11 +6,17 @@ from typing import Dict
 
 class MyPooling(nn.Module):
     def __init__(self, word_embedding_dimension):
+        """
+        :param word_embedding_dimension:
+        """
         super(MyPooling, self).__init__()
         self.word_embedding_dimension = word_embedding_dimension
 
-
     def forward(self, features: Dict[str, Tensor]):
+        """
+        :param features:
+        :return features:
+        """
         token_embeddings = features['token_embeddings']
         attention_mask = features['attention_mask']
 
@@ -23,4 +29,3 @@ class MyPooling(nn.Module):
         output_vector = torch.cat(output_vectors, 1)
         features.update({'sentence_embedding': output_vector})
         return features
-

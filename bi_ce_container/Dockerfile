@@ -8,14 +8,13 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install any needed packages specified in requirements.txt
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 80 available to the world outside this container
-EXPOSE 8888
+EXPOSE 8089
 
 # Define environment variable
-ENV NAME TOPIC
+ENV NAME INTENTION
 
-# Run app_local.py when the container launches
-# CMD ["python", "app_topic_gpt35.py"]
-CMD ["python", "app_topic_gpt35.py"]
+# Run app.py when the container launches
+CMD ["python", "app_bi_ce.py"]

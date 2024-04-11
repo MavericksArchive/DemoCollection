@@ -11,16 +11,13 @@ from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
 
 try:
-    assert load_dotenv(find_dotenv('.env'))  # Load the .env file.
+    assert load_dotenv(find_dotenv('/home/ec2-user/doojung/.openai/.env'))  # Load the .env file.
 except AssertionError as errmsg:
     print(f"AssertionError! Env variable did not load!")
     raise 
 
 import openai
 from langchain.chat_models import ChatOpenAI
-from langchain.chains import ConversationChain  
-from langchain.prompts import PromptTemplate
-from langchain.schema.output_parser import StrOutputParser
 
 os.environ["OPENAI_API_BASE"] = "https://chat-ai.cisco.com"
 openai.api_type = "azure"
@@ -29,14 +26,14 @@ openai.api_version = "2023-03-15-preview"
 
 class CiscoChatAI:
     """
-    Cisco Enterprise Chat AI (Azure OpenAI API)
+    BridgeIT: Cisco Enterprise Chat AI (Azure OpenAI API)
     https://onesearch.cisco.com/ciscoit/chatgpt/home
     """
     def __init__(
         self, 
         model_name="gpt-3.5-turbo", 
         engine_name="gpt-35-turbo",
-        temperature=1e-24, #1e-24,
+        temperature=1e-24, 
         verbose=False):
         
         self.client_id = os.getenv("CLIENT_ID")
@@ -51,18 +48,15 @@ class CiscoChatAI:
         self.engine_name = engine_name
         self.temperature = temperature
         self.verbose = verbose
-        self.create_auth_token()
+        self._create_auth_token()
         self.token_renew_threshold_seconds = 2400  # seconds
         print(f'token_renew_threshold_seconds: {self.token_renew_threshold_seconds} seconds')
 
-    def create_auth_token(self):
+    def _create_auth_token(self):
         """
         Cisco Chat AI auto token
         """
-        
-        self.token_start_time = time.time()  # initialize the time
-        
-        
+        self.token_start_time = time.time()  # initialize the time        
         payload = "grant_type=client_credentials"
         value = base64.b64encode(
             f'{self.client_id}:{self.client_secret}'.encode('utf-8')
@@ -82,10 +76,10 @@ class CiscoChatAI:
             print(f"token_response expires_in:\t{token_response.json()['expires_in']}")
             print(f"token_response access_token[-10:]:\t{token_response.json()['access_token'][-10:]}")
             print(f"Successfully created the auth token")
-        
+
     def load_llm_model(self):
         """
-        langchain's ChatOpenAI
+        LangChain's ChatOpenAI
         """
         self.llm = ChatOpenAI(
             temperature=self.temperature,
@@ -104,29 +98,4 @@ class CiscoChatAI:
             print(f"llm.openai_api_key[-10:]: {self.llm.openai_api_key[-10:]}")
             print(f"llm.openai_api_base: {self.llm.openai_api_base}")
             print(f"Successfully loaded the llm model")
-        
-    def ask_one_time(self, question, template=None):
-        """ 
-        LangChain Expression Language (LCEL)
-        https://python.langchain.com/docs/expression_language/
-        """
-        if not template:
-            template = """
-            Let's think step by step of the question. 
-            Do not generate additional answer besides the direct answer to the question: 
-            {question}
-            Based on all the thought the final answer becomes:
-            """
-        
-        prompt = PromptTemplate(template=template, input_variables=["question"])
-        chain = prompt | self.llm | StrOutputParser() 
-        return chain.invoke({"question": question})
-    
-    def create_conversation_chain(self):
-        """needed for the chatbot style conversation"""
-        self.conversation = ConversationChain(llm=self.llm)  
-    
-    def start_conversation(self, question):
-        """needed for the chatbot style conversation"""
-        return self.conversation.run(question)
 

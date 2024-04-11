@@ -1,76 +1,61 @@
 import os
+import logging
+
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
+
 import torch
-# from accelerate import Accelerator
-import logging
-
-from transformers import StoppingCriteria
-
-# def a stop criteria 
-
-# class MyStoppingCriteria(StoppingCriteria):
-#     def __init__(self, target_sequence, prompt):
-#         self.target_sequence = target_sequence
-#         self.prompt=prompt
-
-#     def __call__(self, input_ids, scores, **kwargs):
-#         # Get the generated text as a string
-#         generated_text = tokenizer.decode(input_ids[0])
-#         generated_text = generated_text.replace(self.prompt,'')
-#         # Check if the target sequence appears in the generated text
-#         if self.target_sequence in generated_text:
-#             return True  # Stop generation
-
-#         return False  # Continue generation
-
-#     def __len__(self):
-#         return 1
-
-#     def __iter__(self):
-#         yield self
 
 
 class PapyrusModel():
-    def __init__(self, 
-                 lora_model_path, 
-                 base_model_path=None,
-                 model_merged=False, ):
-        
+    def __init__(self, lora_model_path, base_model_path=None, model_merged=False):
+        """
+        :param lora_model_path:
+        :param base_model_path:
+        :param model_merged:
+        """
         self.lora_model_path = lora_model_path
         self.model_merged = model_merged
         self.base_model_path = base_model_path
 
-    def _prepare_results(self, 
-                         outcomes, 
-                         generation_indication):
+    # def _prepare_results(self, outcomes, generation_indication):
+    #     """
+    #     Reorganize the results and only focus on generated prompts part
+        
+    #     :param outcomes:
+    #     :param generation_indication: Not used...
+    #     :return generation:
+    #     """
+    #     generation = []
+    #     for idx, sub in enumerate(outcomes):
+    #         if 'Signature:' in sub:
+    #             generation.append(sub.split('Signature:\n')[-1])
+    #         elif 'Solution:' in sub:
+    #             generation.append(sub.split('Solution:\n')[-1])
+    #         elif 'Section:' in sub:
+    #             generation.append(sub.split('Section:\n')[-1])
+    #     return generation
+        
+    def generate(
+        self, 
+        model,
+        tokenizer,
+        inputs, 
+        generation_indication, 
+        generation_config=None):
         """
-          reorgnize the results and only focus on generated prompts part
+        :param model:
+        :param tokenizer:
+        :param inputs:
+        :param generation_indication:
+        :param generation_config:
+        :return final_outcome:
         """
-        generation = []
-        
-        for idx, sub in enumerate(outcomes):
-            if 'Signature:' in sub:
-                generation.append(sub.split('Signature:\n')[-1])
-            elif 'Solution:' in sub:
-                generation.append(sub.split('Solution:\n')[-1])
-            elif 'Section:' in sub:
-                generation.append(sub.split('Section:\n')[-1])
-        return generation
-        
-
-    def generation(self, 
-                   model,
-                   tokenizer,
-                   inputs, 
-                   generation_indication, 
-                   generation_config=None):
-        
         assert generation_indication in ['regex', 'solution', 'solution_with_code'], 'out of generation scope!'
 
-        self.model=model
-        self.tokenizer=tokenizer
+        self.model = model
+        self.tokenizer = tokenizer
 
         if not generation_config:
             generation_config={}
@@ -104,6 +89,7 @@ class PapyrusModel():
                 'solution': 1.5,
                 'solution_with_code': 1.4,
             }
+        
         # set the model as evaluation status
         self.model.eval()
             
@@ -111,26 +97,20 @@ class PapyrusModel():
         logging.info(f"the generation type is {generation_indication}")
         logging.info(f"the generation configuration is {generation_config}")
         
-        # accelerator = Accelerator()
-
         final_outcome = []
         with torch.no_grad():
-             inputs = self.tokenizer(inputs, return_tensors="pt", padding=True, truncation=True).to('cuda')
-             outputs = self.model.generate(**inputs, max_new_tokens=generation_config['max_new_tokens'][generation_indication],
-                                                    # do_sample=generation_config['do_sample'][generation_indication], 
-                                                    # temperature=generation_config['temperature'][generation_indication], 
-                                                    # top_p=generation_config['top_p'][generation_indication],
-                                                    repetition_penalty=generation_config['repetition_penalty'][generation_indication],
-                                                    pad_token_id=self.tokenizer.eos_token_id)
+            inputs = self.tokenizer(
+                inputs, return_tensors="pt", padding=True, truncation=True).to('cuda')
+            outputs = self.model.generate(
+                **inputs, 
+                max_new_tokens=generation_config['max_new_tokens'][generation_indication],
+                repetition_penalty=generation_config['repetition_penalty'][generation_indication],
+                pad_token_id=self.tokenizer.eos_token_id)
              
-             outcomes = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
+            outcomes = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
              
         for idx, sub in enumerate(outcomes):
             final_outcome.append(sub.split('Section:\n')[-1])
             
-        # outcomes = self._prepare_results(outcomes,generation_indication)
-
         return final_outcome
-        
-        
-    
+

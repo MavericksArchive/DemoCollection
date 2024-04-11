@@ -1,0 +1,27 @@
+# local test
+Flask==3.0.2
+pandas==2.2.1
+Requests==2.31.0
+transformers==4.38.2
+torch==2.2.0
+triton==2.2.0
+xformers==0.0.24
+peft==0.9.0
+bitsandbytes==0.43.0
+optimum==1.17.1
+langchain==0.1.9
+langchain-community==0.0.16
+langchain-core==0.1.17
+openai==0.28.1
+pydantic==2.5.2
+python-dotenv==1.0.1
+huggingface_hub==0.20.3
+numpy==1.26.4
+packaging==23.2
+PyYAML==6.0.1
+sentence_transformers==2.3.0
+tqdm==4.66.1
+marshmallow==3.21.0
+unsloth==2024.3
+gunicorn==21.2.0
+gevent==24.2.1

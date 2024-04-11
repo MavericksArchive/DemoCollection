@@ -210,6 +210,7 @@ def pairwise_dot_score(a: Tensor, b: Tensor):
 
     return (a * b).sum(dim=-1)
 
+
 def save_model(model, saved_path):
     model_config= {
         'sentence_transformers': '1.0',

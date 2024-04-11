@@ -1,0 +1,8 @@
+generation_task:
+  pattern_identification: 'regex'
+  workaround_or_solution: 'solution'
+  solution_with_executable_code_snippets: 'solution_with_code'
+
+papyrus:
+  model_path: '/home/ec2-user/model_papyrus_march_2024/zephyr-7b-beta-sft/checkpoint-30000'
+  base_model_path: '/home/ec2-user/model_papyrus_march_2024/zephyr-7b-beta'

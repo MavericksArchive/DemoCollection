@@ -1,0 +1,8 @@
+bice_encoder:
+  return_top_k: 5 
+  candidate_num: 512
+  ciscocom_data_file: /home/ec2-user/data_papyrus_march_2024/bi_ce_data/new_ciscocom_True_True.json
+  bi_model_name_or_path: /home/ec2-user/data_papyrus_march_2024/bi_ce_data/all-sentence-t5-large-Final
+  ce_model_name_or_path: /home/ec2-user/data_papyrus_march_2024/bi_ce_data/all_ce_model_ms-marco-MiniLM-L-12-v2-Final
+  device: cuda
+  embed_file_path: /home/ec2-user/data_papyrus_march_2024/bi_ce_data/new_ciscocom_embedding_all-sentence-t5-large-Final_True_True.pt

@@ -10,13 +10,9 @@ class InputExample:
         """
         Creates one InputExample with the given texts, guid and label
 
-
-        :param guid
-            id for the example
-        :param texts
-            the texts for the example.
-        :param label
-            the label for the example
+        :param guid: id for the example
+        :param texts: the texts for the example.
+        :param label: the label for the example
         """
         self.guid = guid
         self.texts = texts

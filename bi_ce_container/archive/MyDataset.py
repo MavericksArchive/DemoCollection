@@ -1,6 +1,7 @@
 import random
 from InputExample import InputExample
 
+
 class MSMARCODataset(Dataset):
     def __init__(self, queries, corpus, ce_scores):
         self.queries = queries
