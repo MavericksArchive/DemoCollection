@@ -13,6 +13,7 @@ Here is the high-level diagram:
 
     .
     ├── assets/imgs                    # Image files for the README.md
+    ├── aws_lambda_scripts             # AWS Lambda scripts
     ├── bi_ce_container                # Bi-encoder/cross-encoder module
     ├── intention_model_container      # ChatGPT-3.5 intention module
     ├── papyrus_model_container        # Regex/solution generation module
@@ -31,15 +32,17 @@ Please run the following:
 - Build and run the Pipeline docker. This is for the main thread. The user input goes to the main thread first.
 
 ```bash
+cd pipeline_container
 docker build -t pipeline .
-docker run -p 2222:2222 pipeline
+docker run -p 2222:2222 -d pipeline
 ```
 
 - Build and run the Papyrus (Regex/solution generation) docker
 
 ```bash
-docker build -t papyrus .
-docker run -p 8090:8090 papyrus
+cd papyrus_model_container
+docker build -t papyrus_model .
+docker run -p 8090:8090 -d papyrus_model
 ```
 
 ### 2. Set up for running locally
