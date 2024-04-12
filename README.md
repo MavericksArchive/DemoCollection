@@ -4,7 +4,7 @@ The centralized hub for the March 2024 demo.
 Here is the high-level diagram:
 ![demo_flow](assets/imgs/demo_flow.png)
 
-- User input goes to the main thread (`pipeline`) first. The pipeline controls which sub-modules to run.
+- A user input from the `/request` goes to the API Gateway/Lambda which passes it to the main container (`pipeline`) first. The pipeline controls which sub-modules to run.
 - The **only submodule** used in the demo was "Papyrus" (`papyrus_model_container`).
 - The remaining submodules (bi_ce_container and intention_model_container) were **not used** in the demo.
 - To generate the demo set up, please set up the `pipeline` and `papyrus_model_container` only.
